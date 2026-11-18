@@ -2,7 +2,7 @@
 
 import 'dart:ui';
 
-// Nomi identici alle variabili del Figma
+// Nomi identici alle variabili del Figma (colore, ecc...)
 class AppColors {
   AppColors._();
 
@@ -12,7 +12,7 @@ class AppColors {
   static const Color okSoft      = Color(0xFFDCFCE7);
   static const Color warn        = Color(0xFFB45309);
   static const Color full        = Color(0xFFB91C1C);
-  static const Color gray        = Color(0xFF6B7280);
+  static const Color grigio      = Color(0xFF6B7280);
 
   static const Color bg      = Color(0xFFEFF3F8);
   static const Color surface = Color(0xFFFFFFFF);

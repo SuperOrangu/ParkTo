@@ -1,8 +1,7 @@
 import 'package:material_ui/material_ui.dart';
-
 import '../models/parking.dart';
 import '../services/parking_service.dart';
-import '../theme/app_text_styles.dart';
+import 'detail.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,76 +12,79 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ParkingService _service = ParkingService();
-  late Future<List<Parcheggio>> _future;
+  late Future<List<Parcheggio>> _futureParcheggi;
 
   @override
   void initState() {
     super.initState();
-    _future = _service.getParcheggi();
+    _futureParcheggi = _service.getParcheggi();
   }
 
-  void _riprova() {
+  void _ricarica() {
     setState(() {
-      _future = _service.getParcheggi();
+      _futureParcheggi = _service.getParcheggi();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Parcheggi')),
+      appBar: AppBar(title: const Text('ParkTo')),
       body: FutureBuilder<List<Parcheggio>>(
-        future: _future,
+        future: _futureParcheggi,
         builder: (context, snapshot) {
+          // 1. Caricamento
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
+
+          // 2. Errore + Riprova
           if (snapshot.hasError) {
             return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Impossibile caricare i parcheggi.\n${snapshot.error}',
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.bodyMuted,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: _riprova,
-                      child: const Text('Riprova'),
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Impossibile caricare i parcheggi'),
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: _ricarica,
+                    child: const Text('Riprova'),
+                  ),
+                ],
               ),
             );
           }
 
-          final parcheggi = snapshot.data!;
+          // 3. Nessun risultato
+          final parcheggi = snapshot.data ?? [];
+          if (parcheggi.isEmpty) {
+            return const Center(child: Text('Nessun parcheggio trovato'));
+          }
+
+          // 4. Elenco
           return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: parcheggi.length,
-            itemBuilder: (context, index) {
-              final parcheggio = parcheggi[index];
-              return Card(
-                margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.all(16),
+              itemCount: parcheggi.length,
+              itemBuilder: (context, index) {
+                final p = parcheggi[index];
+                return Card(
+                    color: Colors.white,
+                    elevation: 0,
+                    margin: const EdgeInsets.only(bottom: 12),
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(color: Colors.grey.shade300),
+                    ),
                 child: ListTile(
-                  title: Text(parcheggio.nome, style: AppTextStyles.cardTitle),
-                  subtitle: Text(
-                    parcheggio.via,
-                    style: AppTextStyles.cardSubtitle,
-                  ),
-                  trailing: Text(
-                    parcheggio.isBlu
-                        ? '${parcheggio.postiLiberi ?? 0} posti'
-                        : parcheggio.stato ?? parcheggio.tipo,
-                    style: AppTextStyles.body,
-                  ),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    title: Text(p.nome),
+                    subtitle: Text(p.via),
+                    onTap: () => apriDettaglio(context, p),
                 ),
-              );
-            },
+                );
+              },
           );
         },
       ),

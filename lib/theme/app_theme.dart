@@ -1,6 +1,7 @@
 /* SEZIONE DEDICATA AL TEMA DELL'APPLICAZIONE */
 
 import 'package:material_ui/material_ui.dart';
+
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 
@@ -8,24 +9,25 @@ class AppTheme {
   AppTheme._();
 
   // Raggi presi dal Figma
-  static const double radiusCard   = 16;
+  static const double radiusCard = 16;
   static const double radiusButton = 14;
-  static const double radiusPill   = 999;
+  static const double radiusPill = 999;
 
   // Tema chiaro
   static ThemeData get light {
-    final scheme = ColorScheme.fromSeed(
-      seedColor: AppColors.primary,
-      brightness: Brightness.light,
-    ).copyWith(
-      primary: AppColors.primary,
-      onPrimary: Colors.white,
-      primaryContainer: AppColors.primarySoft,
-      surface: AppColors.surface,
-      onSurface: AppColors.ink,
-      outline: AppColors.border,
-      error: AppColors.full,
-    );
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: AppColors.primary,
+          onPrimary: Colors.white,
+          primaryContainer: AppColors.primarySoft,
+          surface: AppColors.surface,
+          onSurface: AppColors.ink,
+          outline: AppColors.border,
+          error: AppColors.full,
+        );
 
     // Tema scuro
     return ThemeData(
