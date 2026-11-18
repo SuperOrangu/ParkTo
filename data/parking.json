@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "nome": "Parcheggio Piazza Verdi",
+    "via": "Via Roma 12",
+    "lat": 45.0675,
+    "lng": 7.6825,
+    "tipo": "blu",
+    "tariffa": 1.5,
+    "orari": "Sempre aperto",
+    "postiLiberi": 12,
+    "postiTotali": 40,
+    "stato": null,
+    "categoria": null
+  },
+  {
+    "id": 2,
+    "nome": "Posto disabili",
+    "via": "Via Roma 18",
+    "lat": 45.0672,
+    "lng": 7.6830,
+    "tipo": "giallo",
+    "tariffa": null,
+    "orari": "Sempre attivo",
+    "postiLiberi": null,
+    "postiTotali": null,
+    "stato": "libero",
+    "categoria": "Disabili"
+  },
+  {
+    "id": 3,
+    "nome": "Garage Centrale",
+    "via": "Via Mazzini 4",
+    "lat": 45.0640,
+    "lng": 7.6890,
+    "tipo": "blu",
+    "tariffa": 2.0,
+    "orari": "06:00 - 24:00",
+    "postiLiberi": 3,
+    "postiTotali": 60,
+    "stato": null,
+    "categoria": null
+  },
+  {
+    "id": 4,
+    "nome": "Parcheggio Stazione",
+    "via": "Piazzale Stazione",
+    "lat": 45.0620,
+    "lng": 7.6780,
+    "tipo": "blu",
+    "tariffa": 1.0,
+    "orari": "Sempre aperto",
+    "postiLiberi": 0,
+    "postiTotali": 80,
+    "stato": null,
+    "categoria": null
+  },
+  {
+    "id": 5,
+    "nome": "Carico/scarico Mazzini",
+    "via": "Via Mazzini 22",
+    "lat": 45.0635,
+    "lng": 7.6900,
+    "tipo": "giallo",
+    "tariffa": null,
+    "orari": "08:00 - 19:00",
+    "postiLiberi": null,
+    "postiTotali": null,
+    "stato": "occupato",
+    "categoria": "Carico/scarico"
+  }
+]
